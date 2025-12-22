@@ -106,5 +106,15 @@ class Playlist
         }
         return $categories;
     }
+
+    /**
+     * Retourne le nombre de formations dans la playlist
+     * @return int
+     */
+    public function getNbFormations(): int
+    {
+        return count($this->formations);
+    }
+
         
 }
