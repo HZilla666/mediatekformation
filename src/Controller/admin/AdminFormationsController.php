@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\FormationType;
+use App\Entity\Formation;
 
 /**
  * Description of AdminFormationsController
@@ -35,7 +36,7 @@ class AdminFormationsController extends AbstractController{
         $this->categorieRepository= $categorieRepository;
     }
     
-    #[Route('/admin/formations', name: 'admin.formations')]
+    #[Route('/admin', name: 'admin.formations')]
     public function index(): Response{
         $formations = $this->formationRepository->findAll();
         $categories = $this->categorieRepository->findAll();
@@ -62,6 +63,20 @@ class AdminFormationsController extends AbstractController{
             return $this->redirectToRoute('admin.formations');
         }
         return $this->render("admin/admin.formation.edit.html.twig", [
+            'formation' => $formation,
+            'formformation' => $formFormation->createView()
+        ]);
+    }
+    #[Route('/admin/formations/ajout', name: 'admin.formations.ajout')]
+    public function ajout(Request $request): Response{
+        $formation = new Formation();
+        $formFormation = $this->createForm(FormationType::class, $formation );
+        $formFormation->handleRequest($request);
+        if($formFormation->isSubmitted() && $formFormation->isValid()){
+            $this->formationRepository->add($formation);
+            return $this->redirectToRoute('admin.formations');
+        }
+        return $this->render("admin/admin.formation.ajout.html.twig", [
             'formation' => $formation,
             'formformation' => $formFormation->createView()
         ]);
