@@ -1,0 +1,51 @@
+{% extends "baseadmin.html.twig" %}
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-left align-top" scope="col">
+                    formation<br />                  
+                </th>
+                <th class="text-left align-top" scope="col">
+                    playlist<br />                   
+                </th>
+                <th class="text-left align-top" scope="col">
+                    catégories            
+                </th>
+                <th class="text-center align-top" scope="col">
+                    date<br />
+                </th>
+                <th>
+                    modifications
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+                <tr class="align-middle">
+                    <td>
+                        <h5 class="text-info">
+                            {{ formation.title }}
+                        </h5>
+                    </td>
+                    <td class="text-left">
+                        {{ formation.playlist.name }}                  
+                    </td>                    
+                    <td class="text-left">
+                        {% for categorie in formation.categories %}
+                            {{ categorie.name }}<br />
+                        {% endfor %}
+                    </td>                    
+                    <td class="text-center">
+                        {{ formation.publishedatstring }}
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-secondary">Editer</a>
+                        <a href="{{ path('admin.formations.suppr', {id:formation.id})}}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ formation.title }} ?')">Supprimer</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
