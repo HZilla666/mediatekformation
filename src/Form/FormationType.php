@@ -34,12 +34,12 @@ class FormationType extends AbstractType
             ->add('videoId', null, ['required' => true])
             ->add('playlist', EntityType::class, [
                 'class' => Playlist::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'required' => true
             ])
             ->add('categories', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false
             ])
