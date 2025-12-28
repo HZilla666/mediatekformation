@@ -1,0 +1,31 @@
+{% extends "baseadmin.html.twig" %}
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h3 class="text-center text-info mt-3">Édition de la playlist "{{ playlist.name }}"</h3>
+            {{ form_start(formplaylist)}}
+            {{ include ('_admin.playlist.form.html.twig')}}
+            {{ form_end(formplaylist)}}
+        </div>
+        <div class="col">
+            <!-- boucle sur l'affichage des formations -->
+            {% for formation in playlistformations %}
+                <div class="row mt-1">
+                    <div class="col-md-auto">
+                        {% if formation.miniature %}
+                            <a href="{{ path('formations.showone', {id:formation.id}) }}">
+                                <img alt="{{ formation.title }}" src="{{ formation.miniature }}">
+                            </a>
+                        {% endif %}  
+                    </div>
+                    <div class="col d-flex align-items-center">
+                        <a href="{{ path('formations.showone', {id:formation.id}) }}" 
+                           class="link-secondary text-decoration-none">
+                            {{ formation.title }}
+                        </a>          
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
