@@ -18,6 +18,11 @@
         {% endfor %}
 
         <!-- entête -->
+        <div class"contaner text-end">
+            {% if app.user %}
+                <a href="{{ path('logout') }}">se deconnecter</a>
+            {% endif %}
+        </div>
         {% block top %}{% endblock %}
         <!-- corps -->
         <div class="container">
